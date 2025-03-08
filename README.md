@@ -25,7 +25,7 @@ Removed sections:
 </div>
 
 <p align="center">
-  <img src="./assets/teaser_clip.gif" alt="animated" />
+  <img src="./assets/teaser_clip.gif" alt="1" />
 </p>
 
 
@@ -37,20 +37,20 @@ Personalization models fuse identity embedding into the cross-attention layers. 
 
 
 <p align="center">
-  <img src="./assets/cross-attn-vis.png" alt="animated" />
+  <img src="./assets/cross-attn-vis.png" alt="2" />
 </p>
 
 ## Method
 As aforementioned, most personalization models focus on the cross-attention layers' interaction with identity embedding, keeping self-attention layers intact. Therefore, it is reasonable to assume that the "foundation knowledge" lies in self-attention layers. Therefore, we introduce a novel foundation-aware self-attention module coupled with an inversion-based process to bring well-aligned attribute information to the personalization process.
 
 <p align="center">
-  <img src="./assets/method.png" alt="animated" />
+  <img src="./assets/method.png" alt="3" />
 </p>
 
 It should be emphasized that via attribute-aware masks, our proposed foundation-aware self-attention (FASA) is able to enhance different attributes in a fine-grained manner:
-```math
-FASA(\mathcal{KQV}_{p}, \mathcal{KQV}_{f}) = Softmax(\frac{[\mathbf{1},\omega\mathcal{M}]\odot Q_{p}\hat{K}^{T}}{\sqrt{d}})\hat{V}
-```
+<p align="center">
+  <img src="./assets/fasa.png" alt="4" />
+</p>
 
 Generally, our proposed framework, **FreeCure**, has several advantages:
 * It is totally training-free.
@@ -61,13 +61,13 @@ Generally, our proposed framework, **FreeCure**, has several advantages:
 Results on references sampling from [CelebA-HQ](https://mmlab.ie.cuhk.edu.hk/projects/CelebA.html):
 
 <p align="center">
-  <img src="./assets/result_1.png" alt="animated" />
+  <img src="./assets/result_1.png" alt="5" />
 </p>
 
 Results on references randomly collected from webpages (non-celebrity identities):
 
 <p align="center">
-  <img src="./assets/result_2.png" alt="animated" />
+  <img src="./assets/result_2.png" alt="6" />
 </p>
 
 ## Visualization of FASA
@@ -75,5 +75,5 @@ Results on references randomly collected from webpages (non-celebrity identities
 Our visualization for the FASA map obviously proves that it can transfer well-aligned attributes into the original personalization model's generation, thus restoring ill-aligned attributes. For areas irrelevant to target attributes, FASA does not disrupt the personalization model's original attention pattern. This substantiates its performance in maintaining identity fidelity.
 
 <p align="center">
-  <img src="./assets/fasa_vis.png" alt="animated" />
+  <img src="./assets/fasa_vis.png" alt="7" />
 </p>
