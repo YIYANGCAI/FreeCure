@@ -35,22 +35,16 @@ Personalization Models fails to control facial attributes accurately. FreeCure f
 ## Motivation
 Personalization models fuse identity embedding into the cross-attention layers. Our preliminary experimental findings reveal that identity embeddings compromise the effectiveness of other tokens in the prompt, thereby limiting high prompt consistency and controllability. Moreover, by deactivating identity embedding, personalization models still demonstrate the underlying foundation models' ability of controlling multiple facial attributes precisely. It suggests that such foundation models' knowledge can be leveraged to **cure** the ill-aligned prompt consistency of personalization models.
 
-
-<p align="center">
-  <img src="./assets/cross-attn-vis.png" alt="2" />
-</p>
+![5](./assets/cross-attn-vis.png)
 
 ## Method
 As aforementioned, most personalization models focus on the cross-attention layers' interaction with identity embedding, keeping self-attention layers intact. Therefore, it is reasonable to assume that the "foundation knowledge" lies in self-attention layers. Therefore, we introduce a novel foundation-aware self-attention module coupled with an inversion-based process to bring well-aligned attribute information to the personalization process.
 
-<p align="center">
-  <img src="./assets/method.png" alt="3" />
-</p>
+![cross-attn](./assets/method.png)
 
 It should be emphasized that via attribute-aware masks, our proposed foundation-aware self-attention (FASA) is able to enhance different attributes in a fine-grained manner:
-<p align="center">
-  <img src="./assets/fasa.png" alt="4" />
-</p>
+
+![4](./assets/fasa.png)
 
 Generally, our proposed framework, **FreeCure**, has several advantages:
 * It is totally training-free.
@@ -60,20 +54,14 @@ Generally, our proposed framework, **FreeCure**, has several advantages:
 ## Results for FreeCure on Popular Personalization Baselines
 Results on references sampling from [CelebA-HQ](https://mmlab.ie.cuhk.edu.hk/projects/CelebA.html):
 
-<p align="center">
-  <img src="./assets/result_1.png" alt="5" />
-</p>
+![3](./assets/result_1.png)
 
 Results on references randomly collected from webpages (non-celebrity identities):
 
-<p align="center">
-  <img src="./assets/result_2.png" alt="6" />
-</p>
+![2](./assets/result_2.png)
 
 ## Visualization of FASA
 
 Our visualization for the FASA map obviously proves that it can transfer well-aligned attributes into the original personalization model's generation, thus restoring ill-aligned attributes. For areas irrelevant to target attributes, FASA does not disrupt the personalization model's original attention pattern. This substantiates its performance in maintaining identity fidelity.
 
-<p align="center">
-  <img src="./assets/fasa_vis.png" alt="7" />
-</p>
+![1](./assets/fasa_vis.png)
