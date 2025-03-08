@@ -24,9 +24,7 @@ Removed sections:
   </p>
 </div>
 
-<p align="center">
-  <img src="./assets/teaser_clip.gif" alt="1" />
-</p>
+![cross-attn](./assets/teaser_clip.gif)
 
 
 ## TL;DR
