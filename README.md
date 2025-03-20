@@ -24,11 +24,14 @@ Removed sections:
   </p>
 </div>
 
+
 ![cross-attn](./assets/teaser_clip.gif)
+
+> 2025.03 We upload the paper to [Arxiv](https://arxiv.org/abs/2411.15277).
 
 
 ## TL;DR
-Personalization Models fails to control facial attributes accurately. FreeCure fixes this problem with a training-free framework without harming these models' impressive ability in maintaining identity information.
+Personalization Models fail to control facial attributes accurately. FreeCure fixes this problem with a training-free framework without harming these models' impressive ability in maintaining identity information.
 
 ## Motivation
 Personalization models fuse identity embedding into the cross-attention layers. Our preliminary experimental findings reveal that identity embeddings compromise the effectiveness of other tokens in the prompt, thereby limiting high prompt consistency and controllability. Moreover, by deactivating identity embedding, personalization models still demonstrate the underlying foundation models' ability of controlling multiple facial attributes precisely. It suggests that such foundation models' knowledge can be leveraged to **cure** the ill-aligned prompt consistency of personalization models.
