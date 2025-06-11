@@ -1,0 +1,13 @@
+torch
+torchvision
+diffusers
+transformers
+huggingface-hub
+spaces
+numpy
+accelerate
+safetensors
+omegaconf
+peft
+gradio
+insightface==0.7.3

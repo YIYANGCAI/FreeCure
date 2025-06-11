@@ -17,11 +17,16 @@ Removed sections:
 - Acknowledgements
 -->
 
+## ___***Foundation Cures Personalization: Improving Personalized Models' Prompt Consistency via Hidden Foundation Knowledge***___
 <div align="center">
-  <h1>FreeCure</h1>
-  <p>
-    This is the project page for the paper "Foundation Cures Personalization: Improving Personalized Models' Prompt Consistency via Hidden Foundation Knowledge"
-  </p>
+<img src='assets/logo.jpg' style="height:75px"></img>
+</div>
+
+ <div align="center">
+
+[![arXiv](https://img.shields.io/badge/arXiv%20paper-2411.15277-b31b1b)](https://arxiv.org/pdf/2411.15277)&nbsp;
+[![project page](https://img.shields.io/badge/Project%20page-FreeCure-cyan)](https://freecure.github.io/)&nbsp;
+
 </div>
 
 
@@ -31,36 +36,73 @@ Removed sections:
 ## TL;DR
 Personalization Models fail to control facial attributes accurately. FreeCure fixes this problem with a training-free framework without harming these models' impressive ability in maintaining identity information.
 
-## Motivation
+## 🌟 Introduction
 Personalization models fuse identity embedding into the cross-attention layers. Our preliminary experimental findings reveal that identity embeddings compromise the effectiveness of other tokens in the prompt, thereby limiting high prompt consistency and controllability. Moreover, by deactivating identity embedding, personalization models still demonstrate the underlying foundation models' ability of controlling multiple facial attributes precisely. It suggests that such foundation models' knowledge can be leveraged to **cure** the ill-aligned prompt consistency of personalization models.
 
-![5](./assets/cross-attn-vis.png)
+## 🔆 Features
+* FreeCure is totally training-free.
+* FreeCure can enhance a broad range of facial attributes and significantly improve the personalization model's prompt consistency while not disrupting its well-trained ability for identity fidelity.
+* FreeCure can be seamlessly integrated into a wide range of mainstream personalization models.
 
-## Method
-As aforementioned, most personalization models focus on the cross-attention layers' interaction with identity embedding, keeping self-attention layers intact. Therefore, it is reasonable to assume that the "foundation knowledge" lies in self-attention layers. Therefore, we introduce a novel foundation-aware self-attention module coupled with an inversion-based process to bring well-aligned attribute information to the personalization process.
+## Results for FreeCure on Different Baselines and Facial Attributes
+FreeCure can handle several baselines built upon different foundation models (e.g., SD-v1.5, SDXL, FLUX.1-dev)
 
-![cross-attn](./assets/method.png)
+For more results, please refer to the [paper](https://arxiv.org/pdf/2411.15277) and the[project page](https://freecure.github.io/) 
 
-It should be emphasized that via attribute-aware masks, our proposed foundation-aware self-attention (FASA) is able to enhance different attributes in a fine-grained manner:
+<div align="center">
+<img src='assets/baseline2.png' style="height:300px"></img>
+</div>
 
-![4](./assets/fasa.png)
+<div align="center">
+<img src='assets/baseline3.png' style="height:300px"></img>
+</div>
 
-Generally, our proposed framework, **FreeCure**, has several advantages:
-* It is totally training-free.
-* It can enhance a broad range of facial attributes and significantly improve the personalization model's prompt consistency while not disrupting its well-trained ability for identity fidelity.
-* It can be seamlessly integrated into a wide range of mainstream personalization models
+## 🚀 Run the Codes
 
-## Results for FreeCure on Popular Personalization Baselines
-Results on references sampling from [CelebA-HQ](https://mmlab.ie.cuhk.edu.hk/projects/CelebA.html):
+### Prepration
+Download the BiSeNet and SAM's weights: [BiSeNet](https://drive.google.com/open?id=154JgKpzCPW82qINcVieuPH3fZ2e0P812) and [SAM](https://huggingface.co/han-cai/efficientvit-sam/resolve/main/xl1.pt). Place them in **/Path/to/this/Repo/freecure/face_parsing/checkpoints**
+```
+├── FreeCure
+    ├── examples
+    ├── freecure
+        ├── fasa_module
+        ├── face_parsing
+            ├── bisenet
+            ├── effcientvit
+            ├── checkpoints
+                ├── xl1.pt
+                ├── 79999_iter.pth
+```
 
-![3](./assets/result_1.png)
+Modify the configuration file (./freecure/cfg.json) in the source code
+```json
+{
+    "local_machine":{
+        "repo": "/Path/to/Your/Repo/",
+        "bisenet": "/Path/to/Your/Repo/freecure/face_parsing/checkpoints/79999_iter.pth",
+        "sam": "/Path/to/Your/Repo/freecure/face_parsing/checkpoints/xl1.pt"
+    }
+}
+```
 
-Results on references randomly collected from webpages (non-celebrity identities):
+To enable face parsing, download following dependencies:
+```shell
+pip install inference[yolo-world]==0.9.13
+pip install onnxsim==0.4.35
+pip install git+https://github.com/facebookresearch/segment-anything.git # sam
+pip install timm # required
+```
 
-![2](./assets/result_2.png)
+We provide examples of PhotoMaker and InstantID, please refer to README.md in the each example folder.
 
-## Visualization of FASA
 
-Our visualization for the FASA map obviously proves that it can transfer well-aligned attributes into the original personalization model's generation, thus restoring ill-aligned attributes. For areas irrelevant to target attributes, FASA does not disrupt the personalization model's original attention pattern. This substantiates its performance in maintaining identity fidelity.
-
-![1](./assets/fasa_vis.png)
+## Citation
+If you find this work helpful, please consider citing:
+```
+@article{cai2024foundation,
+  title={Foundation Cures Personalization: Recovering Facial Personalized Models' Prompt Consistency},
+  author={Cai, Yiyang and Jiang, Zhengkai and Liu, Yulong and Jiang, Chunyang and Xue, Wei and Luo, Wenhan and Guo, Yike},
+  journal={arXiv preprint arXiv:2411.15277},
+  year={2024}
+}
+```
