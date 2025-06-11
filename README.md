@@ -19,7 +19,7 @@ Removed sections:
 
 ## ___***Foundation Cures Personalization: Improving Personalized Models' Prompt Consistency via Hidden Foundation Knowledge***___
 <div align="center">
-<img src='assets/logo.jpg' style="height:75px"></img>
+<img src='assets/logo.png' style="height:125px"></img>
 </div>
 
  <div align="center">
