@@ -31,7 +31,7 @@ Removed sections:
 </div>
 
 <div align="center">
-<img src='./assets/teaser_clip.gif' style="height:550px"></img>
+<img src='./assets/teaser_clip.gif' style="height:450px"></img>
 </div>
 
 
