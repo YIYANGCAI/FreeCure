@@ -18,6 +18,7 @@ Removed sections:
 -->
 
 ## ___***Foundation Cures Personalization: Improving Personalized Models' Prompt Consistency via Hidden Foundation Knowledge***___
+
 <div align="center">
 <img src='assets/logo.png' style="height:125px"></img>
 </div>
@@ -29,8 +30,9 @@ Removed sections:
 
 </div>
 
-
-![cross-attn](./assets/teaser_clip.gif)
+<div align="center">
+<img src='./assets/teaser_clip.gif' style="height:550px"></img>
+</div>
 
 
 ## TL;DR
