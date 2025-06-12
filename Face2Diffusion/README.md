@@ -29,5 +29,5 @@ python inference_f2d.py \
 You should obtain refinement results like this:
 
 <div align="center">
-<img src='examples/demo.png' style="height:400px"></img>
+<img src='examples/demo.png' style="height:320px"></img>
 </div>
