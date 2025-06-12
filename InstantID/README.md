@@ -19,3 +19,9 @@ python infer.py \
     --id-image ./examples/musk_resize.jpeg \
     --prompt "a man with blue eyes and blonde curly hair"
 ```
+
+You should obtain refinement results like this:
+
+<div align="center">
+<img src='assets/demo.png' style="height:400px"></img>
+</div>
