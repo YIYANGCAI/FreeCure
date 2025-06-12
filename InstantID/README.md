@@ -23,5 +23,5 @@ python infer.py \
 You should obtain refinement results like this:
 
 <div align="center">
-<img src='assets/demo.png' style="height:400px"></img>
+<img src='assets/demo.png' style="height:275px"></img>
 </div>
