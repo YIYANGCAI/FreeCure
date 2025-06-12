@@ -20,3 +20,8 @@ python run_photomaker_freecure.py \
     --reference-folder ./examples/scarletthead_woman \
     --output-folder "./outputs/"
 ```
+You should obtain refinement results like this:
+
+<div align="center">
+<img src='examples/demo.png' style="height:275px"></img>
+</div>
