@@ -1,6 +1,6 @@
 def visualize_attention_map(attn, viz_cfg, cur_step, cur_att_layer):
 	"""
-	Visualize the attention map only in the multi-reference self-attention (MRSA) module.
+	Visualize the attention map only in the FASA module.
 	Input:
 		viz_cfg: includes generated image and reference images info.
 		cur_step: viz at current denoising step.
@@ -55,7 +55,7 @@ def visualize_attention_map(attn, viz_cfg, cur_step, cur_att_layer):
 		
 def visualize_correspondence(viz_cfg, attn, cur_step, cur_att_layer):
 	"""
-	Visualize the feature correspondence in the multi-reference self-attention (MRSA) module.
+	Visualize the feature correspondence in the Foundation-aware self-attention (FASA) module.
 	Input:
 		viz_cfg: includes generated image and reference images info.
 		cur_step: viz at current denoising step.
