@@ -24,7 +24,7 @@ def register_fasa_to_model(model, fasa, net_name=None):
 	def fasa_forward(self, place_in_unet):
 		def forward(x, encoder_hidden_states=None, attention_mask=None, context=None, mask=None, **kwargs):
 			"""
-			The msra is similar to the original implementation of LDM CrossAttention class
+			The fasa is similar to the original implementation of LDM CrossAttention class
 			except adding some modifications on the attention
 			"""
 			# import pdb;pdb.set_trace()
@@ -116,7 +116,7 @@ class FoundationAwareSelfAttention():
 	   
 	def __call__(self, q, k, v, sim, attn, is_cross, place_in_unet, num_heads, **kwargs):
 		# import pdb;pdb.set_trace()
-		out = self.mrsa_forward(q, k, v, sim, attn, is_cross, place_in_unet, num_heads, **kwargs)
+		out = self.fasa_forward(q, k, v, sim, attn, is_cross, place_in_unet, num_heads, **kwargs)
 		self.cur_att_layer += 1
 		if self.cur_att_layer == self.num_att_layers:
 			self.cur_att_layer = 0
@@ -143,7 +143,7 @@ class FoundationAwareSelfAttention():
 
 		sim = torch.einsum("h i d, h j d -> h i j", q, k) * kwargs.get("scale")
 		# import pdb;pdb.set_trace()
-		if kwargs.get("attn_batch_type") == 'mrsa':
+		if kwargs.get("attn_batch_type") == 'fasa':
 			sim_own, sim_refs = sim[..., :H*W], sim[..., H*W:]
 			sim_or = [sim_own]
 			for i, (ref_mask, mask_weight) in enumerate(zip(self.ref_masks, self.mask_weights)):
@@ -158,16 +158,16 @@ class FoundationAwareSelfAttention():
 			sim = torch.cat(sim_or, dim=-1)
 		attn = sim.softmax(-1)
 		
-		# viz attention map within MRSA module
+		# viz attention map within fasa module
 		# if self.viz_cfg.viz_attention_map == True and \
-		# 	kwargs.get("attn_batch_type") == 'mrsa' and \
+		# 	kwargs.get("attn_batch_type") == 'fasa' and \
 		# 	self.cur_step in self.viz_cfg.viz_map_at_step and \
 		# 	self.cur_att_layer // 2 in self.viz_cfg.viz_map_at_layer:
 		# 	visualize_attention_map(attn, self.viz_cfg, self.cur_step, self.cur_att_layer//2)
 		
-		# # viz feature correspondence within MRSA module
+		# # viz feature correspondence within fasa module
 		# if self.viz_cfg.viz_feature_correspondence == True and \
-		# 	kwargs.get("attn_batch_type") == 'mrsa' and \
+		# 	kwargs.get("attn_batch_type") == 'fasa' and \
 		# 	self.cur_step in self.viz_cfg.viz_corr_at_step and \
 		# 	self.cur_att_layer // 2 in self.viz_cfg.viz_corr_at_layer:
 		# 	visualize_correspondence(self.viz_cfg, attn, self.cur_step, self.cur_att_layer//2)
@@ -187,9 +187,9 @@ class FoundationAwareSelfAttention():
 		out = rearrange(out, '(b h) n d -> b n (h d)', h=num_heads)
 		return out
 	
-	def mrsa_forward(self, q, k, v, sim, attn, is_cross, place_in_unet, num_heads, **kwargs):
+	def fasa_forward(self, q, k, v, sim, attn, is_cross, place_in_unet, num_heads, **kwargs):
 		"""
-		Mutli-reference self-attention(MRSA) forward function
+		Mutli-reference self-attention(fasa) forward function
 		"""
 		# import pdb;pdb.set_trace()
 		if is_cross or self.cur_step not in self.step_idx or self.cur_att_layer // 2 not in self.layer_idx:
@@ -215,8 +215,8 @@ class FoundationAwareSelfAttention():
 		ku_cat, vu_cat = torch.cat([ku_o, *ku_r.chunk(B-1)], 1), torch.cat([vu_o, *vu_r.chunk(B-1)], 1)
 		kc_cat, vc_cat = torch.cat([kc_o, *kc_r.chunk(B-1)], 1), torch.cat([vc_o, *vc_r.chunk(B-1)], 1)
 
-		out_u_target = self.attn_batch(qu_o, ku_cat, vu_cat, None, None, is_cross, place_in_unet, num_heads, attn_batch_type='mrsa', **kwargs)
-		out_c_target = self.attn_batch(qc_o, kc_cat, vc_cat, None, None, is_cross, place_in_unet, num_heads, attn_batch_type='mrsa', **kwargs)
+		out_u_target = self.attn_batch(qu_o, ku_cat, vu_cat, None, None, is_cross, place_in_unet, num_heads, attn_batch_type='fasa', **kwargs)
+		out_c_target = self.attn_batch(qc_o, kc_cat, vc_cat, None, None, is_cross, place_in_unet, num_heads, attn_batch_type='fasa', **kwargs)
 		
 		# The larger the style_fidelity, the more like the reference concepts, range of values: [0,1]
 		if self.style_fidelity > 0:
