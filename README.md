@@ -17,7 +17,9 @@ Removed sections:
 - Acknowledgements
 -->
 
-## ___***Foundation Cures Personalization: Improving Personalized Models' Prompt Consistency via Hidden Foundation Knowledge***___
+<h1 align="center" style="font-family: 'Courier New', monospace; color: #e74c3c;">Foundation Cures Personalization: Improving Personalized Models' Prompt Consistency via Hidden Foundation Knowledge</h1>
+
+<h3 align="center">NeurIPS 2025</h1>
 
 <div align="center">
 <img src='assets/logo.png' style="height:125px"></img>
@@ -49,7 +51,7 @@ Personalization models fuse identity embedding into the cross-attention layers. 
 ## Results for FreeCure on Different Baselines and Facial Attributes
 FreeCure can handle several baselines built upon different foundation models (e.g., SD-v1.5, SDXL, FLUX.1-dev)
 
-For more results, please refer to the [paper](https://arxiv.org/pdf/2411.15277) and the[project page](https://freecure.github.io/) 
+For more results, please refer to the [paper](https://arxiv.org/pdf/2411.15277) and the [project page](https://freecure.github.io/) 
 
 <div align="center">
 <img src='assets/baseline2.png' style="height:300px"></img>
